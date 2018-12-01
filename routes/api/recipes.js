@@ -4,34 +4,34 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // post & Profile model
-const Post = require("../../models/Post");
+const Recipe = require("../../models/Recipe");
 const Profile = require("../../models/Profile");
 // validation
 const validatePostInput = require("../../validation/post");
 
-// @route GET api/posts/test
+// @route GET api/recipes/test
 // @desc tests post route
 // @access Public-----------------------------------------------------------
-router.get("/test", (req, res) => res.json({ msg: "Posts working" }));
+router.get("/test", (req, res) => res.json({ msg: "Recipe working" }));
 
-// @route GET api/posts
-// @desc get posts
+// @route GET api/recipes
+// @desc get recipes
 // @access Public----------------------------------------------------------
 router.get("/", (req, res) => {
-  Post.find()
+  Recipe.find()
     .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostfound: "no posts found" }));
+    .then(posts => res.json(recipes))
+    .catch(err => res.status(404).json({ nopostfound: "no recipes found" }));
 });
 
-// @route GET api/posts/:id
+// @route GET api/recipes/:id
 // @desc get post by id
 // @access Public----------------------------------------------------------
 router.get("/:id", (req, res) => {
-  Post.findById(req.params.id)
-    .then(post => res.json(post))
+  Recipe.findById(req.params.id)
+    .then(post => res.json(recipe))
     .catch(err =>
-      res.status(404).json({ nopostfound: "no post found with that ID" })
+      res.status(404).json({ nopostfound: "no recipe found with that ID" })
     );
 });
 
@@ -49,7 +49,7 @@ router.post(
       // if any errors, send 400 w errors object
       return res.status(400).json(errors);
     }
-    const newPost = new Post({
+    const newPost = new Recipe({
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
@@ -67,7 +67,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
+      Recipe.findById(req.params.id)
         .then(post => {
           // check for post owner
           if (post.user.toString() !== req.user.id) {
@@ -96,7 +96,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
+      Recipe.findById(req.params.id)
         .then(post => {
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
@@ -125,7 +125,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
+      Recipe.findById(req.params.id)
         .then(post => {
           if (
             post.likes.filter(like => like.user.toString() === req.user.id)
@@ -166,7 +166,7 @@ router.post(
       // if any errors, send 400 w errors object
       return res.status(400).json(errors);
     }
-    Post.findById(req.params.id)
+    Recipe.findById(req.params.id)
       .then(post => {
         const newComment = {
           text: req.body.text,
@@ -191,7 +191,7 @@ router.delete(
   "/comment/:id/:comment_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Post.findById(req.params.id)
+    Recipe.findById(req.params.id)
       .then(post => {
         // check if comment exists
         if (

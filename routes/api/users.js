@@ -15,12 +15,12 @@ const User = require("../../models/User");
 
 // @route GET api/users/test
 // @desc tests users route
-// @access Public
-router.get("/test", (req, res) => res.json({ msg: "Users working" }));
+// @access Public-----------------------------------------------
+router.get("/test", (req, res) => res.json({ msg: "Users test working" }));
 
 // @route GET api/users/resgister
 // @desc resgister users
-// @access Public
+// @access Public------------------------------------------------
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
 
 // @route GET api/users/login
 // @desc login User / Returning JWT Token
-// @access Public
+// @access Public--------------------------------------------------
 
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
@@ -112,7 +112,7 @@ router.post("/login", (req, res) => {
 
 // @route GET api/users/current
 // @desc return current user
-// @access Private
+// @access Private--------------------------------------------------
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),

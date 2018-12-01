@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // create schema
-const PostSchema = new Schema({
+const RecipeSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
@@ -53,4 +53,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = Post = mongoose.model("post", PostSchema);
+module.exports = Recipe = mongoose.model("recipe", RecipeSchema);
