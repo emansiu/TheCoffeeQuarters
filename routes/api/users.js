@@ -18,7 +18,7 @@ const User = require("../../models/User");
 // @access Public-----------------------------------------------
 router.get("/test", (req, res) => res.json({ msg: "Users test working" }));
 
-// @route GET api/users/resgister
+// @route POST api/users/resgister
 // @desc resgister users
 // @access Public------------------------------------------------
 router.post("/register", (req, res) => {
@@ -40,7 +40,8 @@ router.post("/register", (req, res) => {
         d: "mm" //<--default pic for avater
       });
       const newUser = new User({
-        name: req.body.name,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: req.body.email,
         avatar,
         password: req.body.password
@@ -60,7 +61,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-// @route GET api/users/login
+// @route POST api/users/login
 // @desc login User / Returning JWT Token
 // @access Public--------------------------------------------------
 
