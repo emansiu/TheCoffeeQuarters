@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 
-// post & Profile model
+// Recipe & Profile model
 const Recipe = require("../../models/Recipe");
 const Profile = require("../../models/Profile");
 // validation
-const validatePostInput = require("../../validation/post");
+const validateRecipeInput = require("../../validation/recipe");
 
 // @route GET api/recipes/test
 // @desc tests post route
@@ -35,14 +34,14 @@ router.get("/:id", (req, res) => {
     );
 });
 
-// @route POST api/posts
-// @desc Create post
+// @route POST api/recipes
+// @desc Create recipe
 // @access Private----------------------------------------------------------
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
+    const { errors, isValid } = validateRecipeInput(req.body);
 
     // check validation
     if (!isValid) {

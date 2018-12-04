@@ -5,63 +5,68 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "users" //<mongoose way of referencing users db from profile
   },
   handle: {
     type: String,
     required: true,
     max: 40
   },
-  company: {
-    type: String
-  },
-  website: {
-    type: String
-  },
-  location: {
-    type: String
-  },
-  status: {
-    type: String,
-    required: true
-  },
-  skills: {
-    type: [String],
-    required: true
-  },
   bio: {
     type: String
   },
-  githubusername: {
-    type: String
-  },
-  //   -------------- EXPERIENCE SECTION ----------
-  experience: [
+  //   -------------- RECIPE SECTION ----------
+  recipe: [
     {
-      title: {
+      recipename: {
         type: String,
         required: true
       },
-      company: {
+      brewmethod: {
         type: String,
         required: true
       },
-      location: {
+      preferreddevice: {
         type: String
       },
-      from: {
-        type: Date,
+      ingredients: {
+        type: String,
         required: true
       },
-      to: {
+      instructions: {
+        type: String,
+        required: true
+      },
+      beanname: {
+        type: String
+      },
+      roasters: {
+        type: String
+      },
+      origin: {
+        type: String
+      },
+      varietal: {
+        type: String
+      },
+      roast: {
+        type: String,
+        required: true
+      },
+      altitude: {
+        type: String
+      },
+      process: {
+        type: String
+      },
+      producer: {
+        type: String
+      },
+      flavornotes: {
+        type: String
+      },
+      dateadded: {
         type: Date
-      },
-      current: {
-        type: Boolean,
-        default: false
-      },
-      description: {
-        type: String
       }
     }
   ],

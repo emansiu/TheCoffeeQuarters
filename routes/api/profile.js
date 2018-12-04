@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 
 // load validation
 const validateProfileInput = require("../../validation/profile");
-const validateExperienceInput = require("../../validation/experience");
-const validateEducationInput = require("../../validation/education");
+const validateFavoriteInput = require("../../validation/favorite");
+const validateRecipeInput = require("../../validation/recipe");
 
 // load Profile & User
 const Profile = require("../../models/Profile");
@@ -118,20 +117,7 @@ router.post(
 
     profileFields.user = req.user.id;
     if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.company) profileFields.company = req.body.company;
-    if (req.body.website) profileFields.website = req.body.website;
-    if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.status) profileFields.status = req.body.status;
-    if (req.body.githubusername)
-      profileFields.githubusername = req.body.githubusername;
-
-    // skills = split into array
-    if (typeof req.body.skills !== "undefined") {
-      profileFields.skills = req.body.skills
-        .split(",")
-        .map(skill => skill.trim());
-    }
 
     // social
     profileFields.social = {};
@@ -167,14 +153,14 @@ router.post(
   }
 );
 
-// @route POST api/profile/experience
-// @desc Add experience to profile
+// @route POST api/profile/recipe
+// @desc Add recipes to profile
 // @access Private---------------------------------------------------------------
 router.post(
-  "/experience",
+  "/recipe",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateExperienceInput(req.body);
+    const { errors, isValid } = validateRecipeInput(req.body);
 
     // check validation
     if (!isValid) {
@@ -183,17 +169,25 @@ router.post(
     }
 
     Profile.findOne({ user: req.user.id }).then(profile => {
-      const newExp = {
-        title: req.body.title,
-        company: req.body.company,
-        location: req.body.location,
-        from: req.body.from,
-        to: req.body.to,
-        current: req.body.current,
-        description: req.body.description
+      const newRec = {
+        recipename: req.body.recipename,
+        brewmethod: req.body.brewmethod,
+        preferreddevice: req.body.preferreddevice,
+        ingredients: req.body.ingredients,
+        ingredients: req.body.ingredients,
+        beanname: req.body.beanname,
+        roasters: req.body.roasters,
+        origin: req.body.origin,
+        varietal: req.body.varietal,
+        roast: req.body.roast,
+        altitude: req.body.altitude,
+        process: req.body.process,
+        producer: req.body.producer,
+        flavornotes: req.body.flavornotes,
+        dateadded: req.body.dateadded
       };
-      // add to exp array
-      profile.experience.unshift(newExp);
+      // add to rec array
+      profile.recipe.unshift(newRec);
 
       profile.save().then(profile => res.json(profile));
     });
@@ -207,7 +201,7 @@ router.post(
   "/education",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateEducationInput(req.body);
+    const { errors, isValid } = validateFavoriteInput(req.body);
 
     // check validation
     if (!isValid) {

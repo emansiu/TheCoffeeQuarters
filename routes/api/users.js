@@ -91,11 +91,11 @@ router.post("/login", (req, res) => {
 
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; // create JWT payload
 
-        // sign token
+        // sign token (expires in 1 day)
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 86400 },
           (err, token) => {
             res.json({
               success: true,

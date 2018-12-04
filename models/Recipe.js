@@ -17,7 +17,11 @@ const RecipeSchema = new Schema({
   avatar: {
     type: String
   },
-  likes: [
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  favorited: [
     {
       user: {
         type: Schema.Types.ObjectId,
@@ -46,11 +50,7 @@ const RecipeSchema = new Schema({
         default: Date.now
       }
     }
-  ],
-  date: {
-    type: Date,
-    default: Date.now
-  }
+  ]
 });
 
 module.exports = Recipe = mongoose.model("recipe", RecipeSchema);
