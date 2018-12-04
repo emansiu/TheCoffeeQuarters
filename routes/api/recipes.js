@@ -5,6 +5,7 @@ const passport = require("passport");
 // Recipe & Profile model
 const Recipe = require("../../models/Recipe");
 const Profile = require("../../models/Profile");
+const User = require("../../models/User");
 // validation
 const validateRecipeInput = require("../../validation/recipe");
 
@@ -19,7 +20,7 @@ router.get("/test", (req, res) => res.json({ msg: "Recipe working" }));
 router.get("/", (req, res) => {
   Recipe.find()
     .sort({ date: -1 })
-    .then(posts => res.json(recipes))
+    .then(recipes => res.json(recipes))
     .catch(err => res.status(404).json({ nopostfound: "no recipes found" }));
 });
 
@@ -48,13 +49,25 @@ router.post(
       // if any errors, send 400 w errors object
       return res.status(400).json(errors);
     }
-    const newPost = new Recipe({
-      text: req.body.text,
-      name: req.body.name,
-      avatar: req.body.avatar,
+    const newRec = new Recipe({
+      recipename: req.body.recipename,
+      brewmethod: req.body.brewmethod,
+      preferreddevice: req.body.preferreddevice,
+      ingredients: req.body.ingredients,
+      instructions: req.body.instructions,
+      beanname: req.body.beanname,
+      roasters: req.body.roasters,
+      origin: req.body.origin,
+      varietal: req.body.varietal,
+      roast: req.body.roast,
+      altitude: req.body.altitude,
+      process: req.body.process,
+      producer: req.body.producer,
+      flavornotes: req.body.flavornotes,
+      dateadded: req.body.dateadded,
       user: req.user.id
     });
-    newPost.save().then(post => res.json(post));
+    newRec.save().then(recipe => res.json(recipe));
   }
 );
 

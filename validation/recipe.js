@@ -4,22 +4,26 @@ const isEmpty = require("./is-empty");
 module.exports = function validateRecipeInput(data) {
   let errors = {};
 
-  data.school = !isEmpty(data.school) ? data.school : "";
-  data.degree = !isEmpty(data.degree) ? data.degree : "";
-  data.fieldofstudy = !isEmpty(data.fieldofstudy) ? data.fieldofstudy : "";
-  data.from = !isEmpty(data.from) ? data.from : "";
+  data.recipename = !isEmpty(data.recipename) ? data.recipename : "";
+  data.brewmethod = !isEmpty(data.brewmethod) ? data.brewmethod : "";
+  data.ingredients = !isEmpty(data.ingredients) ? data.ingredients : "";
+  data.instructions = !isEmpty(data.instructions) ? data.instructions : "";
+  data.roast = !isEmpty(data.roast) ? data.roast : "";
 
-  if (Validator.isEmpty(data.school)) {
-    errors.school = "School title field is required";
+  if (Validator.isEmpty(data.recipename)) {
+    errors.recipename = "Recipe name is required";
   }
-  if (Validator.isEmpty(data.degree)) {
-    errors.degree = "Degree field is required";
+  if (Validator.isEmpty(data.brewmethod)) {
+    errors.brewmethod = "Brew method is required";
   }
-  if (Validator.isEmpty(data.fieldofstudy)) {
-    errors.fieldofstudy = "Field of study field is required";
+  if (Validator.isEmpty(data.ingredients)) {
+    errors.ingredients = "Ingredient list is required";
   }
-  if (Validator.isEmpty(data.from)) {
-    errors.from = "From date field is required";
+  if (Validator.isEmpty(data.instructions)) {
+    errors.instructions = "Instructions are required";
+  }
+  if (Validator.isEmpty(data.roast)) {
+    errors.roast = "Type of roast is required (ie. light, medium, dark)";
   }
 
   return {

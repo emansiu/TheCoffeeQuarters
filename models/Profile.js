@@ -70,8 +70,8 @@ const ProfileSchema = new Schema({
       }
     }
   ],
-  //   -------------- EDUCATION SECTION ----------
-  education: [
+  //   -------------- FAVORITE SECTION ----------
+  favorite: [
     {
       school: {
         type: String,

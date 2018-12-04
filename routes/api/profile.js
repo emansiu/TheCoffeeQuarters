@@ -10,6 +10,7 @@ const validateRecipeInput = require("../../validation/recipe");
 // load Profile & User
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Recipe = require("../../models/Recipe");
 
 // @route GET api/profile/test
 // @desc tests profile route
@@ -26,7 +27,7 @@ router.get(
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name", "avatar"])
+      .populate("user", ["name", "avatar", "recipes"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "there is no profile for this user";
@@ -119,14 +120,6 @@ router.post(
     if (req.body.handle) profileFields.handle = req.body.handle;
     if (req.body.bio) profileFields.bio = req.body.bio;
 
-    // social
-    profileFields.social = {};
-    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-    if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         // then we are updating
@@ -174,7 +167,7 @@ router.post(
         brewmethod: req.body.brewmethod,
         preferreddevice: req.body.preferreddevice,
         ingredients: req.body.ingredients,
-        ingredients: req.body.ingredients,
+        instructions: req.body.instructions,
         beanname: req.body.beanname,
         roasters: req.body.roasters,
         origin: req.body.origin,
@@ -189,7 +182,7 @@ router.post(
       // add to rec array
       profile.recipe.unshift(newRec);
 
-      profile.save().then(profile => res.json(profile));
+      Profile.save().then(profile => res.json(profile));
     });
   }
 );
