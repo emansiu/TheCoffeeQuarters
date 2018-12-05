@@ -12,14 +12,14 @@ const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 const Recipe = require("../../models/Recipe");
 
-// @route GET api/profile/test
-// @desc tests profile route
-// @access Public----------------------------------------------------
+// GET api/profile/test
+// DESCRIPTION: tests profile route
+// Access Public----------------------------------------------------
 router.get("/test", (req, res) => res.json({ msg: "Profile working" }));
 
-// @route GET api/profile/
-// @desc get current users profile
-// @access Private---------------------------------------------------
+// GET api/profile/
+// DESCRIPTION: get current users profile
+// Access Private---------------------------------------------------
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -39,9 +39,9 @@ router.get(
   }
 );
 
-// @route GET api/profile/all
-// @desc Get all profiles
-// @access Public-------------------------------------------------------
+// GET api/profile/all
+// DESCRIPTION: Get all profiles
+// Access Public-------------------------------------------------------
 
 router.get("/all", (req, res) => {
   const errors = {};
@@ -57,9 +57,9 @@ router.get("/all", (req, res) => {
     .catch(err => res.status(404).json({ profile: "there are no profiles" }));
 });
 
-// @route GET api/profile/handle/:handle
-// @desc Get profile by handle
-// @access Public-------------------------------------------------------
+// GET api/profile/handle/:handle
+// DESCRIPTION: Get profile by handle
+// Access Public-------------------------------------------------------
 
 router.get("/handle/:handle", (req, res) => {
   const errors = {};
@@ -76,9 +76,9 @@ router.get("/handle/:handle", (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-// @route GET api/profile/user/:user_id
-// @desc Get profile by user ID
-// @access Public----------------------------------------------------------
+// GET api/profile/user/:user_id
+// DESCRIPTION: Get profile by user ID
+// Access Public----------------------------------------------------------
 
 router.get("/user/:user_id", (req, res) => {
   const errors = {};
@@ -98,9 +98,9 @@ router.get("/user/:user_id", (req, res) => {
     );
 });
 
-// @route POST api/profile/
-// @desc create or edit user profile
-// @access Private---------------------------------------------------------------
+// POST api/profile/
+// DESCRIPTION: create or edit user profile
+// Access Private---------------------------------------------------------------
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -146,9 +146,9 @@ router.post(
   }
 );
 
-// @route POST api/profile/recipe
-// @desc Add recipes to profile
-// @access Private---------------------------------------------------------------
+// POST api/profile/recipe
+// DESCRIPTION: Add recipes to profile
+// Access Private---------------------------------------------------------------
 router.post(
   "/recipe",
   passport.authenticate("jwt", { session: false }),
@@ -187,9 +187,9 @@ router.post(
   }
 );
 
-// @route POST api/profile/education
-// @desc Add education to profile
-// @access Private---------------------------------------------------------------
+// POST api/profile/education
+// DESCRIPTION: Add education to profile
+// Access Private---------------------------------------------------------------
 router.post(
   "/education",
   passport.authenticate("jwt", { session: false }),
@@ -220,9 +220,9 @@ router.post(
   }
 );
 
-// @route DELETE api/profile/experience/:exp_id
-// @desc Delete experience from profile
-// @access Private---------------------------------------------------------------
+// DELETE api/profile/experience/:exp_id
+// DESCRIPTION: Delete experience from profile
+// Access Private---------------------------------------------------------------
 router.delete(
   "/experience/:exp_id",
   passport.authenticate("jwt", { session: false }),
@@ -244,9 +244,9 @@ router.delete(
   }
 );
 
-// @route DELETE api/profile/education/:edu_id
-// @desc Delete experience from profile
-// @access Private---------------------------------------------------------------
+// DELETE api/profile/education/:edu_id
+// DESCRIPTION: Delete experience from profile
+// Access Private---------------------------------------------------------------
 router.delete(
   "/education/:edu_id",
   passport.authenticate("jwt", { session: false }),
@@ -268,18 +268,31 @@ router.delete(
   }
 );
 
-// @route DELETE api/profile
-// @desc Delete user and profile
-// @access Private---------------------------------------------------------------
+// DELETE api/profile/myprofile
+// DESCRIPTION: Delete profile
+// Access Private---------------------------------------------------------------
+router.delete(
+  "/myprofile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id })
+      .then(() => {
+        res.json({ success: true });
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+// DELETE api/profile
+// DESCRIPTION: Delete user
+// Access Private---------------------------------------------------------------
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
-        res.json({ success: true })
-      );
-    });
+    User.findOneAndRemove({ _id: req.user.id })
+      .then(() => res.json({ success: true }))
+      .catch(err => res.status(404).json(err));
   }
 );
 

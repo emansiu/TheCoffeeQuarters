@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
 // @access Public----------------------------------------------------------
 router.get("/:id", (req, res) => {
   Recipe.findById(req.params.id)
-    .then(post => res.json(recipe))
+    .then(recipe => res.json(recipe))
     .catch(err =>
       res.status(404).json({ nopostfound: "no recipe found with that ID" })
     );
@@ -43,6 +43,8 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
+
+    // Recipe.findOne({ recipes: req.body.recipename });
 
     // check validation
     if (!isValid) {
