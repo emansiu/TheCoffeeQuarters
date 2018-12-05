@@ -187,11 +187,11 @@ router.post(
   }
 );
 
-// POST api/profile/education
+// POST api/profile/favoriterecipe
 // DESCRIPTION: Add education to profile
 // Access Private---------------------------------------------------------------
 router.post(
-  "/education",
+  "/favoriterecipe/:recipe_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateFavoriteInput(req.body);
@@ -202,8 +202,8 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const newEducation = {
+    Recipe.findOne({ user: req.user.id }).then(recipe => {
+      const newRecipe = {
         school: req.body.school,
         degree: req.body.degree,
         fieldofstudy: req.body.fieldofstudy,
@@ -213,7 +213,7 @@ router.post(
         description: req.body.description
       };
       // add to exp array
-      profile.education.unshift(newEducation);
+      recipe.education.unshift(newEducation);
 
       profile.save().then(profile => res.json(profile));
     });
