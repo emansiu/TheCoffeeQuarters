@@ -1,7 +1,7 @@
 {
-  "name": "devconnector",
+  "name": "CoffeeQuarters",
   "version": "1.0.0",
-  "description": "social network for developers",
+  "description": "a place to share coffee recipes",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
