@@ -1,46 +1,60 @@
+@import "normalize.css";
+@import "mobile.css";
+
+* {
+  border: 2px solid white;
+}
+
+.clearfix {
+  overflow: auto;
+}
 body {
-    background-color:black;
+  background-color: black;
 }
-.App {
-    width:100px;
+
+.navbar {
+  width: 100%;
+  border: 5px solid red;
 }
-img {
-    width: 100%;
-  }
-  
-  .landing {
-    position: relative;
-    background: url("../../img/coffee_pic1.jpg") no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    margin-top: -24px;
-    margin-bottom: -50px;
-  }
-  
-  .landing-inner {
-    padding-top: 80px;
-  }
-  
-  .dark-overlay {
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .card-form {
-    opacity: 0.9;
-  }
-  
-  .latest-profiles-img {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .form-control::placeholder {
-    color: #bbb !important;
-  }
-  
+
+.navbar ul li {
+  list-style-type: none;
+  text-decoration: none;
+}
+.title {
+  font-size: 2em;
+}
+.navbar ul.left {
+  float: left;
+  position: fixed;
+  padding: 20px 20px;
+  background-color: white;
+  display: block;
+  color: white;
+  text-align: center;
+  border: 4px solid green;
+}
+.navbar li {
+  float: left;
+  background-color: red;
+  padding: 14px 16px;
+}
+.navbar ul.right {
+  float: right;
+  background-color: white;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  border: 4px solid green;
+}
+
+/* .landing {
+  position: relative;
+  background: url("../../img/coffee_pic1.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+} */

@@ -16,18 +16,18 @@ class Navbar extends Component {
 
     // AUTHENTICATED USER AVAILABLE LINKS -----------------------------------------------------
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
+      <ul className="navbar">
+        <li>
           <Link className="nav-link" to="/feed">
             Post Feed
           </Link>
         </li>
-        <li className="nav-item">
+        <li>
           <Link className="nav-link" to="/dashboard">
             Dashboard
           </Link>
         </li>
-        <li className="nav-item">
+        <li>
           <a
             href="#"
             onClick={this.onLogoutClick.bind(this)}
@@ -49,48 +49,28 @@ class Navbar extends Component {
 
     // GUEST AVAILABLE LINKS -----------------------------------------------------
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Sign Up
-          </Link>
+      <ul className="right">
+        <li>
+          <Link to="/register">Sign Up</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
+        <li>
+          <Link to="/login">Login</Link>
         </li>
       </ul>
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            The Coffee Quarters
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-
-          <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/profiles">
-                  {" "}
-                  Recipes
-                </Link>
-              </li>
-            </ul>
-            {isAuthenticated ? authLinks : guestLinks}
-          </div>
-        </div>
-      </nav>
+      <div className="navbar clearfix">
+        <ul className="left">
+          <li className="title">
+            <Link to="/">The Coffee Quarters</Link>
+          </li>
+          <li>
+            <Link to="/profiles"> Recipes</Link>
+          </li>
+        </ul>
+        {isAuthenticated ? authLinks : guestLinks}
+      </div>
     );
   }
 }
