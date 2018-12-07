@@ -17,11 +17,20 @@ class Navbar extends Component {
     // AUTHENTICATED USER AVAILABLE LINKS -----------------------------------------------------
     const authLinks = (
       <ul className="navbar">
-        <li>
-          <Link className="nav-link" to="/feed">
-            Post Feed
-          </Link>
-        </li>
+        <div className="dropdown">
+          <li>
+            <Link to="/recipes"> Recipes</Link>
+          </li>
+          <li>
+            <Link to="/#"> My Recipes</Link>
+          </li>
+          <li>
+            <Link to="/#"> Favorite Recipes</Link>
+          </li>
+          <li>
+            <Link to="/#"> Browse Recipes</Link>
+          </li>
+        </div>
         <li>
           <Link className="nav-link" to="/dashboard">
             Dashboard
@@ -50,10 +59,26 @@ class Navbar extends Component {
     // GUEST AVAILABLE LINKS -----------------------------------------------------
     const guestLinks = (
       <ul className="right">
-        <li>
+        <div className="dropdown">
+          <li className="dropbtn">
+            <Link to="/recipes"> Recipes</Link>
+          </li>
+          <div className="dropdown-content">
+            <li>
+              <Link to="/#"> My Recipes</Link>
+            </li>
+            <li>
+              <Link to="/#"> Favorite Recipes</Link>
+            </li>
+            <li>
+              <Link to="/#"> Browse Recipes</Link>
+            </li>
+          </div>
+        </div>
+        <li className="link">
           <Link to="/register">Sign Up</Link>
         </li>
-        <li>
+        <li className="link">
           <Link to="/login">Login</Link>
         </li>
       </ul>
@@ -64,9 +89,6 @@ class Navbar extends Component {
         <ul className="left">
           <li className="title">
             <Link to="/">The Coffee Quarters</Link>
-          </li>
-          <li>
-            <Link to="/profiles"> Recipes</Link>
           </li>
         </ul>
         {isAuthenticated ? authLinks : guestLinks}
