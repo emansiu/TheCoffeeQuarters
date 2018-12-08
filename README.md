@@ -4,4 +4,4 @@ Browse coffee recipe posted by users. Sign up and use your phone as a scale - le
 
 Still in development but design is below.
 
-![alt text](design/mobile_home.png)
+![alt text](https://github.com/emansiu/TheCoffeeQuarters/blob/master/Design/mobile_home.png)
