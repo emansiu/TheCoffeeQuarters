@@ -19,7 +19,7 @@
 }
 
 .info-card-right {
-  width: 40%;
+  max-width: 500px;
   float: right;
   margin: 30px;
   background-color: rgba(114, 93, 69, 0.8);

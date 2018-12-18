@@ -85,13 +85,15 @@ class Navbar extends Component {
     );
 
     return (
-      <div className="navbar clearfix">
-        <ul className="left">
-          <li className="title">
-            <Link to="/">The Coffee Quarters</Link>
-          </li>
-        </ul>
-        {isAuthenticated ? authLinks : guestLinks}
+      <div className="navbarContainer">
+        <div className="navbar clearfix">
+          <ul className="left">
+            <li className="title">
+              <Link to="/">The Coffee Quarters</Link>
+            </li>
+          </ul>
+          {isAuthenticated ? authLinks : guestLinks}
+        </div>
       </div>
     );
   }

@@ -14,20 +14,24 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="info-card-right">
-          <h1> Welcome to The Coffee Quarters!</h1>
-          <h2>Create a profile and share recipes or favorite other recipes.</h2>
-          <h2>
-            signing in with your phone will allow you to weigh your beans right
-            on your phone!
-          </h2>
+        <div className="container">
+          <div className="info-card-right">
+            <h1> Welcome to The Coffee Quarters!</h1>
+            <h2>
+              Create a profile and share recipes or favorite other recipes.
+            </h2>
+            <h2>
+              signing in with your phone will allow you to weigh your beans
+              right on your phone!
+            </h2>
+          </div>
+          <Link to="/register" className="btn btn-lg btn-info mr-2">
+            Sign Up
+          </Link>
+          <Link to="/login" className="btn btn-lg btn-light">
+            Login
+          </Link>
         </div>
-        <Link to="/register" className="btn btn-lg btn-info mr-2">
-          Sign Up
-        </Link>
-        <Link to="/login" className="btn btn-lg btn-light">
-          Login
-        </Link>
       </div>
     );
   }
